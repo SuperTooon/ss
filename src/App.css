@@ -1,0 +1,167 @@
+/* ==================== SUPER TON - REACT APP STYLES ==================== */
+
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+
+/* ==================== CSS VARIABLES ==================== */
+:root {
+  --color-primary: #0098ff;
+  --color-primary-light: #00baff;
+  --color-bg-dark: #001532;
+  --color-bg-darker: #0a0a1a;
+  --color-text: #fff;
+  --color-text-muted: rgba(255,255,255,.65);
+  --shadow-btn: 0 10px 26px rgba(0,0,0,.25);
+  --transition-fast: 0.25s ease;
+  --transition-normal: 0.3s ease;
+  --border-radius: 12px;
+}
+
+/* ==================== RESET & BASE ==================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: clamp(14px, 1.5vw, 18px);
+  scroll-behavior: smooth;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--color-text);
+  min-height: 100svh;
+  overflow-x: hidden;
+  background: var(--color-bg-dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==================== APP CONTAINER ==================== */
+.app {
+  min-height: 100svh;
+  position: relative;
+}
+
+/* ==================== BACKGROUND ANIMATION ==================== */
+.app::before {
+  content: "";
+  position: fixed;
+  inset: -10%;
+  background: url('/assets/images/super.png') center/cover no-repeat;
+  z-index: -2;
+  animation: moveBg 20s ease-in-out infinite alternate;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+@keyframes moveBg {
+  0% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.05) translate(-1%, 1%); }
+  100% { transform: scale(1) translate(1%, -1%); }
+}
+
+/* ==================== DARK MODE ==================== */
+.app.dark::before {
+  filter: brightness(0.35) saturate(0.7);
+}
+
+.app.dark .overlay {
+  background: linear-gradient(130deg, rgba(0,20,60,.7), rgba(0,10,30,.85)) !important;
+}
+
+/* ==================== TON SNOW - DARK MODE ==================== */
+.app.dark .ton {
+  color: #80d4ff;
+  text-shadow: 0 0 15px rgba(0,180,255,1);
+}
+
+/* ==================== WAVE ANIMATIONS ==================== */
+@keyframes waveMoveRight {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes waveMoveLeft {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+/* ==================== REDUCED MOTION ==================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .app::before {
+    animation: none;
+  }
+}
+
+/* ==================== SELECTION ==================== */
+::selection {
+  background: rgba(0, 180, 255, 0.3);
+  color: #fff;
+}
+
+/* ==================== SCROLLBAR ==================== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 180, 255, 0.4);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 180, 255, 0.6);
+}
+
+/* ==================== FOCUS STYLES ==================== */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-primary-light);
+  outline-offset: 2px;
+}
+
+/* ==================== UTILITY CLASSES ==================== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
