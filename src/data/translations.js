@@ -51,13 +51,13 @@ export const translations = {
     },
     brokers: [
       { name: 'Khaled Flavio', link: 'https://t.me/k_h_a' },
-      { name: 'Eyad', link: 'https://t.me/i_22_x' },
+      { name: 'Error', link: 'https://t.me/mrtrgms' },
       { name: 'Leo', link: 'https://t.me/Seif_KaYed' },
       { name: 'Doma', link: 'https://t.me/x_d_x' },
-      { name: 'Ben', link: 'https://t.me/BENVBEN' },
+      { name: 'Hazem', link: 'https://t.me/H_A_Z_M' },
       { name: 'Steven', link: 'https://t.me/m_g_0' },
       { name: 'Joker', link: 'https://t.me/o_u_d' },
-      { name: 'Mahmoud', link: 'https://t.me/c_e_w' },
+      { name: 'Mahmoud', link: 'https://t.me/Mahmuod' },
       { name: 'Omar', link: 'https://t.me/FAZ3a' },
       { name: 'Sonic', link: 'https://t.me/w_r_94' }
     ],
@@ -118,13 +118,13 @@ export const translations = {
     },
     brokers: [
       { name: 'Khaled Flavio', link: 'https://t.me/k_h_a' },
-      { name: 'Eyad', link: 'https://t.me/i_22_x' },
+      { name: 'Error', link: 'https://t.me/mrtrgms' },
       { name: 'Leo', link: 'https://t.me/Seif_KaYed' },
       { name: 'Doma', link: 'https://t.me/x_d_x' },
-      { name: 'Ben', link: 'https://t.me/BENVBEN' },
+      { name: 'Hazem', link: 'https://t.me/H_A_Z_M' },
       { name: 'Steven', link: 'https://t.me/m_g_0' },
       { name: 'Joker', link: 'https://t.me/o_u_d' },
-      { name: 'Mahmoud', link: 'https://t.me/c_e_w' },
+      { name: 'Mahmoud', link: 'https://t.me/Mahmuod' },
       { name: 'Omar', link: 'https://t.me/FAZ3a' },
       { name: 'Sonic', link: 'https://t.me/w_r_94' }
     ],
