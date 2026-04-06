@@ -11,7 +11,7 @@ export function AppProvider({ children }) {
 
   // Dark Mode State
   const [isDark, setIsDark] = useState(() => {
-    return localStorage.getItem('theme') !== 'light';
+    return localStorage.getItem('theme') === 'dark';
   });
 
   // Current Section State
