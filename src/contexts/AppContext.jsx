@@ -14,8 +14,10 @@ export function AppProvider({ children }) {
     return localStorage.getItem('theme') === 'dark';
   });
 
-  // Current Section State
-  const [currentSection, setCurrentSection] = useState('main');
+  // Current Section State (persisted)
+  const [currentSection, setCurrentSection] = useState(() => {
+    return localStorage.getItem('section') || 'main';
+  });
 
   // Menu State
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -69,6 +71,7 @@ export function AppProvider({ children }) {
   const navigateTo = useCallback((sectionId) => {
     playClickSound();
     setCurrentSection(sectionId);
+    localStorage.setItem('section', sectionId);
     setIsMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [playClickSound]);
