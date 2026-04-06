@@ -6,6 +6,7 @@ import WaveBackground from './components/WaveBackground';
 import Menu from './components/Menu';
 import AboutPopup from './components/AboutPopup';
 import Footer from './components/Footer';
+import CustomCursor from './components/CustomCursor';
 
 // Sections
 import HomeSection from './components/sections/HomeSection';
@@ -51,6 +52,9 @@ function AppContent() {
       <MemoizedTonSnow />
       <MemoizedWaveBackground />
       
+      {/* Custom Cursor */}
+      <CustomCursor />
+
       {/* Navigation */}
       <MemoizedMenu />
       
@@ -70,8 +74,17 @@ function AppContent() {
           overflowY: 'auto'
         }}
       >
-        <AnimatePresence mode="wait">
-          <CurrentSection key={currentSection} />
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={currentSection}
+            initial={{ opacity: 0, y: 18, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -14, scale: 0.98 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            style={{ width: '100%', display: 'contents' }}
+          >
+            <CurrentSection />
+          </motion.div>
         </AnimatePresence>
       </motion.main>
       
