@@ -73,12 +73,18 @@ export function AppProvider({ children }) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [playClickSound]);
 
-  // Increment visitor count on mount
+  // Increment global visitor count on mount
   useEffect(() => {
-    const current = parseInt(localStorage.getItem('visitCount') || '0', 10);
-    const next = current + 1;
-    localStorage.setItem('visitCount', next);
-    setVisitCount(next);
+    fetch('https://api.countapi.xyz/hit/supertonapp.com/visits')
+      .then(res => res.json())
+      .then(data => {
+        if (data?.value) setVisitCount(data.value);
+      })
+      .catch(() => {
+        const local = parseInt(localStorage.getItem('visitCount') || '0', 10) + 1;
+        localStorage.setItem('visitCount', local);
+        setVisitCount(local);
+      });
   }, []);
 
   // Initialize on mount
