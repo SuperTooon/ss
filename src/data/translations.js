@@ -52,7 +52,7 @@ export const translations = {
     brokers: [
       { name: 'Kasper', link: 'https://t.me/t_e_r' },
       { name: 'Error', link: 'https://t.me/mrtrgms' },
-      { name: 'Leo', link: 'https://t.me/Seif_KaYed' },
+      { name: 'Leo', link: 'https://t.me/ccmca' },
       { name: 'Doma', link: 'https://t.me/x_d_x' },
       { name: 'Hazem', link: 'https://t.me/H_A_Z_M' },
       { name: 'Steven', link: 'https://t.me/m_g_0' },
@@ -119,7 +119,7 @@ export const translations = {
     brokers: [
       { name: 'Kasper', link: 'https://t.me/t_e_r' },
       { name: 'Error', link: 'https://t.me/mrtrgms' },
-      { name: 'Leo', link: 'https://t.me/Seif_KaYed' },
+      { name: 'Leo', link: 'https://t.me/ccmca' },
       { name: 'Doma', link: 'https://t.me/x_d_x' },
       { name: 'Hazem', link: 'https://t.me/H_A_Z_M' },
       { name: 'Steven', link: 'https://t.me/m_g_0' },
