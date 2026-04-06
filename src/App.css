@@ -83,6 +83,69 @@ body {
   text-shadow: 0 0 15px rgba(0,180,255,1);
 }
 
+/* ==================== SKELETON SHIMMER ==================== */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.skeleton-avatar {
+  background: linear-gradient(90deg,
+    rgba(255,255,255,.08) 25%,
+    rgba(255,255,255,.18) 50%,
+    rgba(255,255,255,.08) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+/* ==================== GRADIENT BORDER CARD ==================== */
+.broker-card {
+  position: relative;
+  border: none !important;
+}
+
+.broker-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 1px;
+  background: linear-gradient(135deg,
+    rgba(0,180,255,.7),
+    rgba(0,80,200,.2),
+    rgba(0,180,255,.5)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.owner-card {
+  position: relative;
+  border: none !important;
+}
+
+.owner-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 1px;
+  background: linear-gradient(135deg,
+    rgba(255,215,0,.7),
+    rgba(200,150,0,.2),
+    rgba(255,215,0,.5)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
 /* ==================== WAVE ANIMATIONS ==================== */
 @keyframes waveMoveRight {
   0% { transform: translateX(0); }
