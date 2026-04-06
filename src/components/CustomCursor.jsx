@@ -1,6 +1,10 @@
-import { useEffect, useRef, memo } from 'react';
+import { useEffect, useRef, useState, memo } from 'react';
 
 function CustomCursor() {
+  const [isTouch] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches
+  );
+
   const dotRef = useRef(null);
   const glowRef = useRef(null);
   const pos = useRef({ x: -100, y: -100 });
@@ -8,8 +12,7 @@ function CustomCursor() {
   const rafRef = useRef(null);
 
   useEffect(() => {
-    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
-    if (isTouchDevice) return;
+    if (isTouch) return;
 
     document.body.style.cursor = 'none';
 
@@ -39,6 +42,8 @@ function CustomCursor() {
       document.body.style.cursor = '';
     };
   }, []);
+
+  if (isTouch) return null;
 
   return (
     <>
