@@ -1,7 +1,26 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { User, ArrowLeft, ArrowRight, BadgeCheck } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
+
+function useCounter(target, duration = 800) {
+  const [count, setCount] = useState(0);
+  const started = useRef(false);
+  useEffect(() => {
+    if (started.current) return;
+    started.current = true;
+    const steps = 30;
+    const step = target / steps;
+    let current = 0;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { setCount(target); clearInterval(timer); }
+      else setCount(Math.floor(current));
+    }, duration / steps);
+    return () => clearInterval(timer);
+  }, [target, duration]);
+  return count;
+}
 
 function VerifiedBadge() {
   return (
@@ -20,6 +39,7 @@ function VerifiedBadge() {
 
 function BrokerAvatar({ link }) {
   const [failed, setFailed] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const username = link?.split('/').pop();
 
   if (failed || !username) {
@@ -36,16 +56,27 @@ function BrokerAvatar({ link }) {
   }
 
   return (
-    <img
-      src={`https://t.me/i/userpic/320/${username}.jpg`}
-      alt={username}
-      onError={() => setFailed(true)}
-      style={{
-        width: 38, height: 38, borderRadius: '50%',
-        objectFit: 'cover', flexShrink: 0,
-        border: '2px solid rgba(0,180,255,.4)'
-      }}
-    />
+    <span style={{ position: 'relative', flexShrink: 0, width: 38, height: 38 }}>
+      {!loaded && (
+        <span className="skeleton-avatar" style={{
+          position: 'absolute', inset: 0,
+          borderRadius: '50%', border: '2px solid rgba(0,180,255,.4)'
+        }} />
+      )}
+      <img
+        src={`https://t.me/i/userpic/320/${username}.jpg`}
+        alt={username}
+        onLoad={() => setLoaded(true)}
+        onError={() => setFailed(true)}
+        style={{
+          width: 38, height: 38, borderRadius: '50%',
+          objectFit: 'cover',
+          border: '2px solid rgba(0,180,255,.4)',
+          opacity: loaded ? 1 : 0,
+          transition: 'opacity 0.3s ease'
+        }}
+      />
+    </span>
   );
 }
 
@@ -73,6 +104,7 @@ const itemVariants = {
 export default function BrokersSection() {
   const { t, navigateTo, isDark, lang, playClickSound } = useApp();
   const Arrow = lang === 'ar' ? ArrowRight : ArrowLeft;
+  const useCounterValue = useCounter(t.brokers.length);
 
   return (
     <motion.section
@@ -99,6 +131,18 @@ export default function BrokersSection() {
         }}
       >
         {t.sections.brokers}
+        <span style={{
+          fontSize: 'clamp(0.85rem, 1.2vw, 1rem)',
+          marginInlineStart: '10px',
+          background: 'rgba(0,180,255,.2)',
+          border: '1px solid rgba(0,180,255,.4)',
+          borderRadius: '20px',
+          padding: '2px 10px',
+          verticalAlign: 'middle',
+          fontWeight: 500
+        }}>
+          {useCounterValue}
+        </span>
       </motion.h1>
 
       {/* Brokers List */}
@@ -110,11 +154,12 @@ export default function BrokersSection() {
           target="_blank"
           rel="noopener noreferrer"
           onClick={playClickSound}
+          className="broker-card"
           whileHover={{ 
             scale: 1.02, 
             y: -2,
             boxShadow: isDark 
-              ? '0 0 25px rgba(0,180,255,.5)' 
+              ? '0 0 30px rgba(0,180,255,.5), 0 8px 32px rgba(0,0,0,.4)' 
               : '0 14px 30px rgba(0,0,0,.3), 0 0 18px rgba(0,180,255,.25)'
           }}
           whileTap={{ scale: 0.98 }}
@@ -127,10 +172,11 @@ export default function BrokersSection() {
             color: '#fff',
             cursor: 'pointer',
             borderRadius: '12px',
-            border: `1px solid ${isDark ? 'rgba(0,180,255,.3)' : 'rgba(255,255,255,.28)'}`,
-            background: isDark ? 'rgba(0,150,255,.15)' : 'rgba(255,255,255,.12)',
-            backdropFilter: 'blur(8px)',
-            boxShadow: '0 10px 26px rgba(0,0,0,.25)',
+            background: isDark
+              ? 'linear-gradient(135deg, rgba(0,150,255,.18), rgba(0,60,180,.12))'
+              : 'linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.08))',
+            backdropFilter: 'blur(12px)',
+            boxShadow: '0 10px 26px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.1)',
             transition: 'all 0.25s ease',
             fontFamily: 'inherit',
             textDecoration: 'none',

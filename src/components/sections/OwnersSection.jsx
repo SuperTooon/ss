@@ -20,6 +20,7 @@ function OwnerBadge() {
 
 function OwnerAvatar({ link }) {
   const [failed, setFailed] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const username = link?.split('/').pop();
 
   if (failed || !username) {
@@ -36,16 +37,27 @@ function OwnerAvatar({ link }) {
   }
 
   return (
-    <img
-      src={`https://t.me/i/userpic/320/${username}.jpg`}
-      alt={username}
-      onError={() => setFailed(true)}
-      style={{
-        width: 38, height: 38, borderRadius: '50%',
-        objectFit: 'cover', flexShrink: 0,
-        border: '2px solid rgba(100,149,237,.5)'
-      }}
-    />
+    <span style={{ position: 'relative', flexShrink: 0, width: 38, height: 38 }}>
+      {!loaded && (
+        <span className="skeleton-avatar" style={{
+          position: 'absolute', inset: 0,
+          borderRadius: '50%', border: '2px solid rgba(100,149,237,.5)'
+        }} />
+      )}
+      <img
+        src={`https://t.me/i/userpic/320/${username}.jpg`}
+        alt={username}
+        onLoad={() => setLoaded(true)}
+        onError={() => setFailed(true)}
+        style={{
+          width: 38, height: 38, borderRadius: '50%',
+          objectFit: 'cover',
+          border: '2px solid rgba(100,149,237,.5)',
+          opacity: loaded ? 1 : 0,
+          transition: 'opacity 0.3s ease'
+        }}
+      />
+    </span>
   );
 }
 
@@ -110,11 +122,12 @@ export default function OwnersSection() {
           target="_blank"
           rel="noopener noreferrer"
           onClick={playClickSound}
+          className="owner-card"
           whileHover={{ 
             scale: 1.02, 
             y: -2,
             boxShadow: isDark 
-              ? '0 0 30px rgba(65,105,225,.5), inset 0 1px 0 rgba(255,255,255,.2)' 
+              ? '0 0 30px rgba(255,215,0,.3), 0 8px 32px rgba(0,0,0,.4)' 
               : '0 14px 30px rgba(0,0,0,.3), 0 0 20px rgba(65,105,225,.4)'
           }}
           whileTap={{ scale: 0.98 }}
@@ -127,12 +140,11 @@ export default function OwnersSection() {
             color: '#fff',
             cursor: 'pointer',
             borderRadius: '12px',
-            border: `1px solid ${isDark ? 'rgba(100,149,237,.6)' : 'rgba(65,105,225,.7)'}`,
-            background: isDark 
-              ? 'linear-gradient(135deg, rgba(65,105,225,.35), rgba(25,25,112,.25))' 
-              : 'linear-gradient(135deg, rgba(65,105,225,.4), rgba(25,25,112,.3))',
-            backdropFilter: 'blur(8px)',
-            boxShadow: '0 10px 26px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.15)',
+            background: isDark
+              ? 'linear-gradient(135deg, rgba(65,105,225,.28), rgba(25,25,112,.18))'
+              : 'linear-gradient(135deg, rgba(65,105,225,.35), rgba(25,25,112,.25))',
+            backdropFilter: 'blur(12px)',
+            boxShadow: '0 10px 26px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.12)',
             transition: 'all 0.25s ease',
             fontFamily: 'inherit',
             textDecoration: 'none',
