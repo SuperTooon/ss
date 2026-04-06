@@ -50,7 +50,7 @@ export const translations = {
       close: 'إغلاق'
     },
     brokers: [
-      { name: 'Khaled Flavio', link: 'https://t.me/k_h_a' },
+      { name: 'Kasper Flavio', link: 'https://t.me/t_e_r' },
       { name: 'Error', link: 'https://t.me/mrtrgms' },
       { name: 'Leo', link: 'https://t.me/Seif_KaYed' },
       { name: 'Doma', link: 'https://t.me/x_d_x' },
@@ -117,7 +117,7 @@ export const translations = {
       close: 'Close'
     },
     brokers: [
-      { name: 'Khaled Flavio', link: 'https://t.me/k_h_a' },
+      { name: 'Kasper Flavio', link: 'https://t.me/t_e_r' },
       { name: 'Error', link: 'https://t.me/mrtrgms' },
       { name: 'Leo', link: 'https://t.me/Seif_KaYed' },
       { name: 'Doma', link: 'https://t.me/x_d_x' },
