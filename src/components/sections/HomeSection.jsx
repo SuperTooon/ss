@@ -142,51 +142,56 @@ export default function HomeSection() {
         />
       </motion.h2>
 
-      {/* Visitor Counter Badge */}
+      {/* Visitor Counter Badge - Fixed Corner */}
       {visitCount > 0 && (
         <motion.div
-          variants={itemVariants}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.3 }}
           style={{
-            display: 'flex',
-            justifyContent: lang === 'ar' ? 'flex-start' : 'flex-end',
-            width: 'min(360px, 90%)',
-            margin: '0 auto 24px',
-          }}
-        >
-          <div style={{
+            position: 'fixed',
+            top: '15px',
+            [lang === 'ar' ? 'left' : 'right']: '15px',
+            zIndex: 1000,
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '8px',
-            padding: '6px 14px 6px 8px',
-            borderRadius: '20px',
-            background: 'rgba(0,180,255,.1)',
-            border: '1px solid rgba(0,180,255,.28)',
-            backdropFilter: 'blur(14px)',
-            WebkitBackdropFilter: 'blur(14px)',
-            fontSize: 'clamp(0.78rem, 1.1vw, 0.92rem)',
-            color: 'rgba(255,255,255,.85)',
-            boxShadow: '0 4px 14px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.1)',
+            gap: '7px',
+            padding: '7px 13px 7px 9px',
+            borderRadius: '14px',
+            background: isDark
+              ? 'linear-gradient(135deg, rgba(0,120,255,.22), rgba(0,60,180,.18))'
+              : 'linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.08))',
+            border: isDark
+              ? '1px solid rgba(0,180,255,.4)'
+              : '1px solid rgba(255,255,255,.32)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            fontSize: 'clamp(0.72rem, 1vw, 0.85rem)',
+            color: 'rgba(255,255,255,.9)',
+            boxShadow: isDark
+              ? '0 4px 18px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.12), 0 0 10px rgba(0,150,255,.12)'
+              : '0 4px 18px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.28)',
+          }}
+        >
+          <span style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: 24,
+            height: 24,
+            borderRadius: '50%',
+            background: 'rgba(0,180,255,.22)',
+            border: '1px solid rgba(0,180,255,.38)',
+            backdropFilter: 'blur(8px)',
+            flexShrink: 0
           }}>
-            <span style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: 26,
-              height: 26,
-              borderRadius: '50%',
-              background: 'rgba(0,180,255,.2)',
-              border: '1px solid rgba(0,180,255,.35)',
-              backdropFilter: 'blur(8px)',
-              flexShrink: 0
-            }}>
-              <Eye size={13} color="#7dd8ff" />
-            </span>
-            <span>
-              {lang === 'ar'
-                ? `${animatedCount.toLocaleString('ar-EG')} زيارة`
-                : `${animatedCount.toLocaleString()} visits`}
-            </span>
-          </div>
+            <Eye size={12} color="#7dd8ff" />
+          </span>
+          <span>
+            {lang === 'ar'
+              ? `${animatedCount.toLocaleString('ar-EG')} زيارة`
+              : `${animatedCount.toLocaleString()} visits`}
+          </span>
         </motion.div>
       )}
 
