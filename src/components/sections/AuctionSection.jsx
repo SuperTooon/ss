@@ -25,7 +25,7 @@ const itemVariants = {
 };
 
 export default function AuctionSection() {
-  const { t, navigateTo, isDark, lang } = useApp();
+  const { t, navigateTo, isDark, lang, playClickSound } = useApp();
   const Arrow = lang === 'ar' ? ArrowRight : ArrowLeft;
 
   const links = [
@@ -69,6 +69,7 @@ export default function AuctionSection() {
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={playClickSound}
           whileHover={{ 
             scale: 1.02, 
             y: -2,

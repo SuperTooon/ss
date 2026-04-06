@@ -56,7 +56,7 @@ const itemVariants = {
 };
 
 export default function OwnersSection() {
-  const { t, navigateTo, isDark, lang } = useApp();
+  const { t, navigateTo, isDark, lang, playClickSound } = useApp();
   const Arrow = lang === 'ar' ? ArrowRight : ArrowLeft;
 
   return (
@@ -94,6 +94,7 @@ export default function OwnersSection() {
           href={owner.link}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={playClickSound}
           whileHover={{ 
             scale: 1.02, 
             y: -2,

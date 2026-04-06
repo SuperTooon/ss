@@ -25,7 +25,7 @@ const itemVariants = {
 };
 
 export default function GiftsSection() {
-  const { t, navigateTo, isDark, lang } = useApp();
+  const { t, navigateTo, isDark, lang, playClickSound } = useApp();
   const Arrow = lang === 'ar' ? ArrowRight : ArrowLeft;
 
   return (
@@ -61,6 +61,7 @@ export default function GiftsSection() {
         href={telegramLinks.giftsNews}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={playClickSound}
         whileHover={{ 
           scale: 1.02, 
           y: -2,
