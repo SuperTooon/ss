@@ -85,10 +85,10 @@ function Menu() {
 
   const Arrow = lang === 'ar' ? ChevronLeft : ChevronRight;
 
-  // Menu position based on language
+  // Menu position based on language (Arabic = right, English = left)
   const menuPosition = lang === 'ar' 
-    ? { left: '15px', right: 'auto' }
-    : { left: 'auto', right: '15px' };
+    ? { right: '15px', left: 'auto' }
+    : { left: '15px', right: 'auto' };
 
   return (
     <nav 
@@ -111,19 +111,24 @@ function Menu() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         style={{
-          background: isDark 
-            ? 'linear-gradient(135deg, rgba(0,150,255,.3), rgba(0,100,200,.3))' 
-            : 'linear-gradient(135deg, rgba(255,255,255,.25), rgba(255,255,255,.15))',
+          background: isDark
+            ? 'linear-gradient(135deg, rgba(0,120,255,.25), rgba(0,60,180,.2))'
+            : 'linear-gradient(135deg, rgba(255,255,255,.2), rgba(255,255,255,.08))',
           color: '#fff',
-          border: `1px solid ${isDark ? 'rgba(0,180,255,.4)' : 'rgba(255,255,255,.3)'}`,
-          borderRadius: '12px',
+          border: isDark
+            ? '1px solid rgba(0,180,255,.45)'
+            : '1px solid rgba(255,255,255,.35)',
+          borderRadius: '14px',
           padding: '10px 14px',
           cursor: 'pointer',
-          backdropFilter: 'blur(12px)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0 4px 15px rgba(0,0,0,.2)',
+          boxShadow: isDark
+            ? '0 4px 20px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.15), 0 0 12px rgba(0,150,255,.15)'
+            : '0 4px 20px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.3)',
           fontSize: '1.1rem'
         }}
       >
@@ -163,7 +168,7 @@ function Menu() {
             style={{
               position: 'absolute',
               top: '55px',
-              [lang === 'ar' ? 'left' : 'right']: 0,
+              [lang === 'ar' ? 'right' : 'left']: 0,
               background: isDark 
                 ? 'linear-gradient(135deg, rgba(10,15,40,.95), rgba(5,10,30,.95))' 
                 : 'linear-gradient(135deg, rgba(20,25,60,.9), rgba(10,15,50,.9))',
