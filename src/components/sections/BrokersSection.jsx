@@ -1,7 +1,22 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { User, ArrowLeft, ArrowRight } from 'lucide-react';
+import { User, ArrowLeft, ArrowRight, BadgeCheck } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
+
+function VerifiedBadge() {
+  return (
+    <span style={{
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: '#00b4ff',
+      flexShrink: 0,
+      filter: 'drop-shadow(0 0 4px rgba(0,180,255,.6))'
+    }}>
+      <BadgeCheck size={18} fill="rgba(0,180,255,0.15)" />
+    </span>
+  );
+}
 
 function BrokerAvatar({ link }) {
   const [failed, setFailed] = useState(false);
@@ -126,6 +141,7 @@ export default function BrokersSection() {
         >
           <BrokerAvatar link={broker.link} />
           {broker.name}
+          <VerifiedBadge />
         </motion.a>
       ))}
 

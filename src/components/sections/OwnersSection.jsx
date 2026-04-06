@@ -1,7 +1,22 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Crown, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Crown, ArrowLeft, ArrowRight, ShieldCheck } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
+
+function OwnerBadge() {
+  return (
+    <span style={{
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: '#ffd700',
+      flexShrink: 0,
+      filter: 'drop-shadow(0 0 5px rgba(255,215,0,.7))'
+    }}>
+      <ShieldCheck size={18} fill="rgba(255,215,0,0.15)" />
+    </span>
+  );
+}
 
 function OwnerAvatar({ link }) {
   const [failed, setFailed] = useState(false);
@@ -128,6 +143,7 @@ export default function OwnersSection() {
         >
           <OwnerAvatar link={owner.link} />
           {owner.name}
+          <OwnerBadge />
         </motion.a>
       ))}
 
