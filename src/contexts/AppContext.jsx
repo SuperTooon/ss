@@ -64,10 +64,11 @@ export function AppProvider({ children }) {
 
   // Navigate to Section
   const navigateTo = useCallback((sectionId) => {
+    playClickSound();
     setCurrentSection(sectionId);
     setIsMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+  }, [playClickSound]);
 
   // Initialize on mount
   useEffect(() => {
