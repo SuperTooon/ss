@@ -103,6 +103,7 @@ body {
 .broker-card {
   position: relative;
   border: none !important;
+  overflow: hidden;
 }
 
 .broker-card::before {
@@ -126,6 +127,7 @@ body {
 .owner-card {
   position: relative;
   border: none !important;
+  overflow: hidden;
 }
 
 .owner-card::before {
@@ -144,6 +146,53 @@ body {
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
   pointer-events: none;
+}
+
+/* ==================== TON FALL ANIMATION ==================== */
+@keyframes tonFall {
+  0%   { transform: translateY(-30px) rotate(0deg); }
+  100% { transform: translateY(110vh) rotate(540deg); }
+}
+
+/* ==================== BUTTON SHIMMER ==================== */
+@keyframes shimmerLTR {
+  0%   { transform: translateX(-200%); }
+  45%  { transform: translateX(300%); }
+  100% { transform: translateX(300%); }
+}
+
+@keyframes shimmerRTL {
+  0%   { transform: translateX(200%); }
+  45%  { transform: translateX(-300%); }
+  100% { transform: translateX(-300%); }
+}
+
+.app button,
+.app a[target="_blank"] {
+  overflow: hidden;
+  position: relative;
+}
+
+.app button::after,
+.app a[target="_blank"]::after,
+.broker-card::after,
+.owner-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.11) 50%, transparent 100%);
+  animation: shimmerLTR 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+[dir="rtl"] .app button::after,
+[dir="rtl"] .app a[target="_blank"]::after,
+[dir="rtl"] .broker-card::after,
+[dir="rtl"] .owner-card::after {
+  animation: shimmerRTL 4s ease-in-out infinite;
 }
 
 /* ==================== WAVE ANIMATIONS ==================== */
