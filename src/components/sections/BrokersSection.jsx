@@ -22,17 +22,19 @@ function useCounter(target, duration = 800) {
   return count;
 }
 
-function VerifiedBadge() {
+function VerifiedBadge({ isDark }) {
   return (
     <span style={{
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
-      color: '#0066cc',
+      color: isDark ? '#4db8ff' : '#fff',
       flexShrink: 0,
-      filter: 'drop-shadow(0 0 4px rgba(0,80,200,.8))'
+      filter: isDark
+        ? 'drop-shadow(0 0 5px rgba(0,150,255,.9))'
+        : 'drop-shadow(0 1px 3px rgba(0,0,0,.5))'
     }}>
-      <BadgeCheck size={18} fill="rgba(0,100,220,0.3)" />
+      <BadgeCheck size={18} fill={isDark ? 'rgba(0,120,255,0.35)' : 'rgba(255,255,255,0.35)'} />
     </span>
   );
 }
@@ -187,7 +189,7 @@ export default function BrokersSection() {
         >
           <BrokerAvatar link={broker.link} />
           {broker.name}
-          <VerifiedBadge />
+          <VerifiedBadge isDark={isDark} />
         </motion.a>
       ))}
 

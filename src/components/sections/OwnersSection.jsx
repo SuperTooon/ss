@@ -3,17 +3,19 @@ import { useState } from 'react';
 import { Crown, ArrowLeft, ArrowRight, ShieldCheck } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
 
-function OwnerBadge() {
+function OwnerBadge({ isDark }) {
   return (
     <span style={{
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
-      color: '#ffd700',
+      color: isDark ? '#ffd700' : '#fff',
       flexShrink: 0,
-      filter: 'drop-shadow(0 0 5px rgba(255,215,0,.7))'
+      filter: isDark
+        ? 'drop-shadow(0 0 5px rgba(255,215,0,.7))'
+        : 'drop-shadow(0 1px 3px rgba(0,0,0,.5))'
     }}>
-      <ShieldCheck size={18} fill="rgba(255,215,0,0.15)" />
+      <ShieldCheck size={18} fill={isDark ? 'rgba(255,215,0,0.2)' : 'rgba(255,255,255,0.35)'} />
     </span>
   );
 }
@@ -155,7 +157,7 @@ export default function OwnersSection() {
         >
           <OwnerAvatar link={owner.link} />
           {owner.name}
-          <OwnerBadge />
+          <OwnerBadge isDark={isDark} />
         </motion.a>
       ))}
 
