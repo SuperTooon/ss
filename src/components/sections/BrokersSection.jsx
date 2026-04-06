@@ -1,6 +1,38 @@
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { User, ArrowLeft, ArrowRight } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
+
+function BrokerAvatar({ link }) {
+  const [failed, setFailed] = useState(false);
+  const username = link?.split('/').pop();
+
+  if (failed || !username) {
+    return (
+      <span style={{
+        width: 38, height: 38, borderRadius: '50%',
+        background: 'rgba(0,180,255,.2)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        flexShrink: 0, border: '2px solid rgba(0,180,255,.4)'
+      }}>
+        <User size={18} />
+      </span>
+    );
+  }
+
+  return (
+    <img
+      src={`https://t.me/i/userpic/320/${username}.jpg`}
+      alt={username}
+      onError={() => setFailed(true)}
+      style={{
+        width: 38, height: 38, borderRadius: '50%',
+        objectFit: 'cover', flexShrink: 0,
+        border: '2px solid rgba(0,180,255,.4)'
+      }}
+    />
+  );
+}
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -91,7 +123,7 @@ export default function BrokersSection() {
             gap: '12px'
           }}
         >
-          <User size={20} />
+          <BrokerAvatar link={broker.link} />
           {broker.name}
         </motion.a>
       ))}
