@@ -9,11 +9,11 @@ function VerifiedBadge() {
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
-      color: '#00b4ff',
+      color: '#0066cc',
       flexShrink: 0,
-      filter: 'drop-shadow(0 0 4px rgba(0,180,255,.6))'
+      filter: 'drop-shadow(0 0 4px rgba(0,80,200,.8))'
     }}>
-      <BadgeCheck size={18} fill="rgba(0,180,255,0.15)" />
+      <BadgeCheck size={18} fill="rgba(0,100,220,0.3)" />
     </span>
   );
 }
