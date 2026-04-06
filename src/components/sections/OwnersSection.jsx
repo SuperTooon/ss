@@ -1,6 +1,38 @@
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { Crown, ArrowLeft, ArrowRight } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
+
+function OwnerAvatar({ link }) {
+  const [failed, setFailed] = useState(false);
+  const username = link?.split('/').pop();
+
+  if (failed || !username) {
+    return (
+      <span style={{
+        width: 38, height: 38, borderRadius: '50%',
+        background: 'rgba(65,105,225,.25)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        flexShrink: 0, border: '2px solid rgba(100,149,237,.5)'
+      }}>
+        <Crown size={18} />
+      </span>
+    );
+  }
+
+  return (
+    <img
+      src={`https://t.me/i/userpic/320/${username}.jpg`}
+      alt={username}
+      onError={() => setFailed(true)}
+      style={{
+        width: 38, height: 38, borderRadius: '50%',
+        objectFit: 'cover', flexShrink: 0,
+        border: '2px solid rgba(100,149,237,.5)'
+      }}
+    />
+  );
+}
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -93,7 +125,7 @@ export default function OwnersSection() {
             gap: '12px'
           }}
         >
-          <Crown size={22} />
+          <OwnerAvatar link={owner.link} />
           {owner.name}
         </motion.a>
       ))}
