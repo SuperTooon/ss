@@ -1,6 +1,26 @@
 import { motion } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
 import { Shield, Users, MessageCircle, Star } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
+
+function useCounter(target, duration = 1000) {
+  const [count, setCount] = useState(0);
+  const started = useRef(false);
+  useEffect(() => {
+    if (!target || started.current) return;
+    started.current = true;
+    const steps = 40;
+    const step = target / steps;
+    let current = 0;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { setCount(target); clearInterval(timer); }
+      else setCount(Math.floor(current));
+    }, duration / steps);
+    return () => clearInterval(timer);
+  }, [target, duration]);
+  return count;
+}
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -23,7 +43,8 @@ const itemVariants = {
 };
 
 export default function HomeSection() {
-  const { t, navigateTo, isDark, lang, playClickSound } = useApp();
+  const { t, navigateTo, isDark, lang, playClickSound, visitCount } = useApp();
+  const animatedCount = useCounter(visitCount);
 
   const handleNavigate = (sectionId) => {
     playClickSound();
@@ -120,6 +141,34 @@ export default function HomeSection() {
           style={{ width: '28px', height: '28px' }}
         />
       </motion.h2>
+
+      {/* Visitor Counter Badge */}
+      {visitCount > 0 && (
+        <motion.div
+          variants={itemVariants}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            margin: '0 auto 24px',
+            padding: '6px 16px',
+            borderRadius: '20px',
+            background: 'rgba(0,180,255,.12)',
+            border: '1px solid rgba(0,180,255,.3)',
+            backdropFilter: 'blur(8px)',
+            fontSize: 'clamp(0.78rem, 1.1vw, 0.92rem)',
+            color: 'rgba(255,255,255,.85)',
+            boxShadow: '0 4px 12px rgba(0,0,0,.2)',
+          }}
+        >
+          <span style={{ fontSize: '1em' }}>👥</span>
+          <span>
+            {lang === 'ar'
+              ? `${animatedCount.toLocaleString('ar-EG')} زيارة`
+              : `${animatedCount.toLocaleString()} visits`}
+          </span>
+        </motion.div>
+      )}
 
       {/* Buttons */}
       {buttons.map((button, index) => (
