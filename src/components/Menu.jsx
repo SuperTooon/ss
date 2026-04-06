@@ -42,7 +42,8 @@ function Menu() {
     setIsMenuOpen, 
     setIsAboutOpen,
     toggleLang, 
-    toggleDarkMode 
+    toggleDarkMode,
+    playClickSound
   } = useApp();
   
   const [showLangOptions, setShowLangOptions] = useState(false);
@@ -64,20 +65,23 @@ function Menu() {
   }, [isMenuOpen, setIsMenuOpen]);
 
   const handleLangChange = useCallback((newLang) => {
+    playClickSound();
     toggleLang(newLang);
     setShowLangOptions(false);
     setIsMenuOpen(false);
-  }, [toggleLang, setIsMenuOpen]);
+  }, [playClickSound, toggleLang, setIsMenuOpen]);
 
   const handleAboutClick = useCallback(() => {
+    playClickSound();
     setIsAboutOpen(true);
     setIsMenuOpen(false);
     setShowLangOptions(false);
-  }, [setIsAboutOpen, setIsMenuOpen]);
+  }, [playClickSound, setIsAboutOpen, setIsMenuOpen]);
 
   const handleDarkModeToggle = useCallback(() => {
+    playClickSound();
     toggleDarkMode();
-  }, [toggleDarkMode]);
+  }, [playClickSound, toggleDarkMode]);
 
   const Arrow = lang === 'ar' ? ChevronLeft : ChevronRight;
 
@@ -100,6 +104,7 @@ function Menu() {
       {/* Menu Toggle Button */}
       <motion.button
         onClick={() => {
+          playClickSound();
           setIsMenuOpen(!isMenuOpen);
           setShowLangOptions(false);
         }}
