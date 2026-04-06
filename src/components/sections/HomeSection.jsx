@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
-import { Shield, Users, MessageCircle, Star } from 'lucide-react';
+import { Shield, Users, MessageCircle, Star, Eye } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
 
 function useCounter(target, duration = 1000) {
@@ -147,26 +147,46 @@ export default function HomeSection() {
         <motion.div
           variants={itemVariants}
           style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px',
+            display: 'flex',
+            justifyContent: lang === 'ar' ? 'flex-start' : 'flex-end',
+            width: 'min(360px, 90%)',
             margin: '0 auto 24px',
-            padding: '6px 16px',
-            borderRadius: '20px',
-            background: 'rgba(0,180,255,.12)',
-            border: '1px solid rgba(0,180,255,.3)',
-            backdropFilter: 'blur(8px)',
-            fontSize: 'clamp(0.78rem, 1.1vw, 0.92rem)',
-            color: 'rgba(255,255,255,.85)',
-            boxShadow: '0 4px 12px rgba(0,0,0,.2)',
           }}
         >
-          <span style={{ fontSize: '1em' }}>👥</span>
-          <span>
-            {lang === 'ar'
-              ? `${animatedCount.toLocaleString('ar-EG')} زيارة`
-              : `${animatedCount.toLocaleString()} visits`}
-          </span>
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '6px 14px 6px 8px',
+            borderRadius: '20px',
+            background: 'rgba(0,180,255,.1)',
+            border: '1px solid rgba(0,180,255,.28)',
+            backdropFilter: 'blur(14px)',
+            WebkitBackdropFilter: 'blur(14px)',
+            fontSize: 'clamp(0.78rem, 1.1vw, 0.92rem)',
+            color: 'rgba(255,255,255,.85)',
+            boxShadow: '0 4px 14px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.1)',
+          }}>
+            <span style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 26,
+              height: 26,
+              borderRadius: '50%',
+              background: 'rgba(0,180,255,.2)',
+              border: '1px solid rgba(0,180,255,.35)',
+              backdropFilter: 'blur(8px)',
+              flexShrink: 0
+            }}>
+              <Eye size={13} color="#7dd8ff" />
+            </span>
+            <span>
+              {lang === 'ar'
+                ? `${animatedCount.toLocaleString('ar-EG')} زيارة`
+                : `${animatedCount.toLocaleString()} visits`}
+            </span>
+          </div>
         </motion.div>
       )}
 
