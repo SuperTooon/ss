@@ -23,6 +23,9 @@ export function AppProvider({ children }) {
   // About Popup State
   const [isAboutOpen, setIsAboutOpen] = useState(false);
 
+  // Visitor Counter
+  const [visitCount, setVisitCount] = useState(0);
+
   // Sound Ref
   const clickSoundRef = useRef(null);
 
@@ -70,6 +73,14 @@ export function AppProvider({ children }) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [playClickSound]);
 
+  // Increment visitor count on mount
+  useEffect(() => {
+    const current = parseInt(localStorage.getItem('visitCount') || '0', 10);
+    const next = current + 1;
+    localStorage.setItem('visitCount', next);
+    setVisitCount(next);
+  }, []);
+
   // Initialize on mount
   useEffect(() => {
     document.documentElement.lang = lang;
@@ -99,7 +110,8 @@ export function AppProvider({ children }) {
     toggleLang,
     toggleDarkMode,
     navigateTo,
-    playClickSound
+    playClickSound,
+    visitCount
   };
 
   return (
