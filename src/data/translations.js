@@ -50,20 +50,20 @@ export const translations = {
       close: 'إغلاق'
     },
     brokers: [
-      { name: 'Kasper', link: 'https://t.me/t_e_r' },
-      { name: 'Error', link: 'https://t.me/mrtrgms' },
-      { name: 'Leo', link: 'https://t.me/ccmca' },
-      { name: 'Doma', link: 'https://t.me/x_d_x' },
-      { name: 'Hazem', link: 'https://t.me/H_A_Z_M' },
-      { name: 'Steven', link: 'https://t.me/c_o_a' },
-      { name: 'Joker', link: 'https://t.me/o_u_d' },
-      { name: 'Mahmoud', link: 'https://t.me/Mahmuod' },
-      { name: 'Omar', link: 'https://t.me/FAZ3a' },
-      { name: 'Sonic', link: 'https://t.me/w_r_94' }
+      { name: 'كاسبر', link: 'https://t.me/t_e_r' },
+      { name: 'إيرور', link: 'https://t.me/mrtrgms' },
+      { name: 'ليو', link: 'https://t.me/ccmca' },
+      { name: 'دوما', link: 'https://t.me/x_d_x' },
+      { name: 'حازم', link: 'https://t.me/H_A_Z_M' },
+      { name: 'ستيفن', link: 'https://t.me/c_o_a' },
+      { name: 'جوكر', link: 'https://t.me/o_u_d' },
+      { name: 'محمود', link: 'https://t.me/Mahmuod' },
+      { name: 'عمر', link: 'https://t.me/FAZ3a' },
+      { name: 'سونيك', link: 'https://t.me/w_r_94' }
     ],
     owners: [
-      { name: 'Mazen Yasser', link: 'https://t.me/s_r_x' },
-      { name: 'Mahmoud Drak', link: 'https://t.me/m_eee' }
+      { name: 'مازن ياسر', link: 'https://t.me/s_r_x' },
+      { name: 'محمود دراك', link: 'https://t.me/m_eee' }
     ]
   },
   en: {
