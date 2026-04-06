@@ -85,10 +85,10 @@ function Menu() {
 
   const Arrow = lang === 'ar' ? ChevronLeft : ChevronRight;
 
-  // Menu position based on language (Arabic = left, English = right)
+  // Menu position based on language (Arabic = right, English = left)
   const menuPosition = lang === 'ar' 
-    ? { left: '15px', right: 'auto' }
-    : { left: 'auto', right: '15px' };
+    ? { right: '15px', left: 'auto' }
+    : { left: '15px', right: 'auto' };
 
   return (
     <nav 
@@ -168,7 +168,7 @@ function Menu() {
             style={{
               position: 'absolute',
               top: '55px',
-              [lang === 'ar' ? 'left' : 'right']: 0,
+              [lang === 'ar' ? 'right' : 'left']: 0,
               background: isDark 
                 ? 'linear-gradient(135deg, rgba(10,15,40,.95), rgba(5,10,30,.95))' 
                 : 'linear-gradient(135deg, rgba(20,25,60,.9), rgba(10,15,50,.9))',
