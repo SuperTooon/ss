@@ -76,20 +76,12 @@ export function AppProvider({ children }) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [playClickSound]);
 
-  // Increment global visitor count on mount (Firebase Realtime Database)
+  // Increment global visitor count via secure server-side API
   useEffect(() => {
-    const fbUrl = import.meta.env.VITE_FIREBASE_URL;
-    if (!fbUrl) return;
-    fetch(`${fbUrl}/visits.json`)
+    fetch('/api/visits')
       .then(r => r.json())
-      .then(current => {
-        const next = (current || 0) + 1;
-        fetch(`${fbUrl}/visits.json`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(next)
-        });
-        setVisitCount(next);
+      .then(data => {
+        if (data?.count) setVisitCount(data.count);
       })
       .catch(() => {
         const local = parseInt(localStorage.getItem('visitCount') || '0', 10) + 1;
