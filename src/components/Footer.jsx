@@ -1,8 +1,25 @@
-import { memo } from 'react';
+import { memo, useRef } from 'react';
 import { useApp } from '../contexts/AppContext';
 
 function Footer() {
-  const { t, isDark } = useApp();
+  const { t, isDark, navigateTo } = useApp();
+  const tapCount = useRef(0);
+  const lastTap = useRef(0);
+
+  const handleTap = () => {
+    const now = Date.now();
+    if (now - lastTap.current < 500) {
+      tapCount.current += 1;
+    } else {
+      tapCount.current = 1;
+    }
+    lastTap.current = now;
+
+    if (tapCount.current === 3) {
+      navigateTo('admin');
+      tapCount.current = 0;
+    }
+  };
 
   return (
     <footer
@@ -25,10 +42,16 @@ function Footer() {
         backdropFilter: 'blur(4px)'
       }}
     >
-      <span style={{ 
-        fontWeight: 500,
-        letterSpacing: '0.5px'
-      }}>
+      <span
+        onClick={handleTap}
+        style={{
+          fontWeight: 500,
+          letterSpacing: '0.5px',
+          cursor: 'default',
+          userSelect: 'none',
+          WebkitUserSelect: 'none'
+        }}
+      >
         {t.footer}
       </span>
     </footer>
