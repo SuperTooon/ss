@@ -3,6 +3,26 @@ import { useState, useEffect, useRef } from 'react';
 import { User, ArrowLeft, ArrowRight, BadgeCheck } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
 
+// Default brokers fallback
+const defaultBrokers = {
+  ar: [
+    { name: 'كاسبر', link: 'https://t.me/t_e_r' },
+    { name: 'ليو', link: 'https://t.me/ccmca' },
+    { name: 'حازم', link: 'https://t.me/H_A_Z_M' },
+    { name: 'ستيفن', link: 'https://t.me/c_o_a' },
+    { name: 'محمود', link: 'https://t.me/Mahmuod' },
+    { name: 'عمر', link: 'https://t.me/FAZ3a' }
+  ],
+  en: [
+    { name: 'Kasper', link: 'https://t.me/t_e_r' },
+    { name: 'Leo', link: 'https://t.me/ccmca' },
+    { name: 'Hazem', link: 'https://t.me/H_A_Z_M' },
+    { name: 'Steven', link: 'https://t.me/c_o_a' },
+    { name: 'Mahmoud', link: 'https://t.me/Mahmuod' },
+    { name: 'Omar', link: 'https://t.me/FAZ3a' }
+  ]
+};
+
 function useCounter(target, duration = 800) {
   const [count, setCount] = useState(0);
   const started = useRef(false);
@@ -106,7 +126,23 @@ const itemVariants = {
 export default function BrokersSection() {
   const { t, navigateTo, isDark, lang, playClickSound } = useApp();
   const Arrow = lang === 'ar' ? ArrowRight : ArrowLeft;
-  const useCounterValue = useCounter(t.brokers.length);
+  const [brokers, setBrokers] = useState(defaultBrokers[lang] || defaultBrokers.en);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/admin/brokers')
+      .then(r => r.json())
+      .then(data => {
+        if (data?.brokers) {
+          const list = lang === 'ar' ? data.brokers.ar : data.brokers.en;
+          if (list?.length > 0) setBrokers(list);
+        }
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [lang]);
+
+  const useCounterValue = useCounter(brokers.length);
 
   return (
     <motion.section
@@ -148,7 +184,9 @@ export default function BrokersSection() {
       </motion.h1>
 
       {/* Brokers List */}
-      {t.brokers.map((broker, index) => (
+      {loading ? (
+        <p style={{ opacity: 0.6 }}>Loading...</p>
+      ) : brokers.map((broker, index) => (
         <motion.a
           key={index}
           variants={itemVariants}
