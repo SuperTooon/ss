@@ -17,6 +17,7 @@ import AuctionSection from './components/sections/AuctionSection';
 import GiftsSection from './components/sections/GiftsSection';
 import BrokersSection from './components/sections/BrokersSection';
 import OwnersSection from './components/sections/OwnersSection';
+import AdminSection from './components/sections/AdminSection';
 
 import './App.css';
 
@@ -35,7 +36,8 @@ const sections = {
   auction: AuctionSection,
   gifts: GiftsSection,
   brokers: BrokersSection,
-  owners: OwnersSection
+  owners: OwnersSection,
+  admin: AdminSection
 };
 
 function AppContent() {
