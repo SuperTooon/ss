@@ -46,6 +46,18 @@ export default function HomeSection() {
   const { t, navigateTo, isDark, lang, playClickSound, visitCount } = useApp();
   const animatedCount = useCounter(visitCount);
 
+  // Secret admin shortcut: Ctrl+Shift+A
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
+        e.preventDefault();
+        navigateTo('admin');
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [navigateTo]);
+
   const handleNavigate = (sectionId) => {
     playClickSound();
     navigateTo(sectionId);
