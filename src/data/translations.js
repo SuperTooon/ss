@@ -138,5 +138,5 @@ export const telegramLinks = {
   auctionGroup: 'https://t.me/AuctionTonGroup',
   auctionBot: 'https://t.me/ToonAuctionBot',
   giftsNews: 'https://t.me/gift_toon',
-  platformBot: 'https://t.me/FragmentCST_Bot'
+  platformBot: 'https://t.me/FragmentTooonBot'
 };
