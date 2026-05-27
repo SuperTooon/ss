@@ -16,6 +16,7 @@ import SuperTonSection from './components/sections/SuperTonSection';
 import AuctionSection from './components/sections/AuctionSection';
 import GiftsSection from './components/sections/GiftsSection';
 import BrokersSection from './components/sections/BrokersSection';
+import BrokersChoiceSection from './components/sections/BrokersChoiceSection';
 import OwnersSection from './components/sections/OwnersSection';
 import AdminSection from './components/sections/AdminSection';
 import AuctionBrokersSection from './components/sections/AuctionBrokersSection';
@@ -36,7 +37,8 @@ const sections = {
   superton: SuperTonSection,
   auction: AuctionSection,
   gifts: GiftsSection,
-  brokers: BrokersSection,
+  brokers: BrokersChoiceSection,
+  superBrokers: BrokersSection,
   auctionBrokers: AuctionBrokersSection,
   owners: OwnersSection,
   admin: AdminSection
