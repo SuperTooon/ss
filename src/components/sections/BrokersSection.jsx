@@ -234,7 +234,7 @@ export default function BrokersSection() {
       {/* Back Button */}
       <motion.button
         variants={itemVariants}
-        onClick={() => navigateTo('main')}
+        onClick={() => navigateTo('superton')}
         whileHover={{ 
           scale: 1.02, 
           y: -2,
