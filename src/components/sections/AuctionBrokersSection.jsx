@@ -237,7 +237,7 @@ export default function AuctionBrokersSection() {
       {/* Back Button */}
       <motion.button
         variants={itemVariants}
-        onClick={() => navigateTo('auction')}
+        onClick={() => navigateTo('brokers')}
         whileHover={{
           scale: 1.02,
           y: -2,
