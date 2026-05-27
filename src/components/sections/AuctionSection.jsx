@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Radio, Users, Bot, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Radio, Users, Bot, ArrowLeft, ArrowRight, Handshake } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
 import { telegramLinks } from '../../data/translations';
 
@@ -27,6 +27,7 @@ const itemVariants = {
 export default function AuctionSection() {
   const { t, navigateTo, isDark, lang, playClickSound } = useApp();
   const Arrow = lang === 'ar' ? ArrowRight : ArrowLeft;
+  const brokersLabel = lang === 'ar' ? 'وسطاء المزاد' : 'Auction Brokers';
 
   const links = [
     { label: t.links.auctionChannel, url: telegramLinks.auctionChannel, icon: Radio },
@@ -103,6 +104,42 @@ export default function AuctionSection() {
           {link.label}
         </motion.a>
       ))}
+
+      {/* Auction Brokers Button */}
+      <motion.button
+        variants={itemVariants}
+        onClick={() => navigateTo('auctionBrokers')}
+        whileHover={{ 
+          scale: 1.02, 
+          y: -2,
+          boxShadow: isDark 
+            ? '0 0 25px rgba(255,140,0,.5)' 
+            : '0 14px 30px rgba(0,0,0,.3), 0 0 18px rgba(255,140,0,.25)'
+        }}
+        whileTap={{ scale: 0.98 }}
+        style={{
+          display: 'flex',
+          width: 'min(360px, 90%)',
+          margin: '12px auto',
+          padding: 'clamp(12px, 1.5vw, 18px) clamp(20px, 2vw, 28px)',
+          fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
+          color: '#fff',
+          cursor: 'pointer',
+          borderRadius: '12px',
+          border: `1px solid ${isDark ? 'rgba(255,140,0,.4)' : 'rgba(255,140,0,.5)'}`,
+          background: isDark ? 'rgba(255,120,0,.18)' : 'rgba(255,120,0,.15)',
+          backdropFilter: 'blur(8px)',
+          boxShadow: '0 10px 26px rgba(0,0,0,.25)',
+          transition: 'all 0.25s ease',
+          fontFamily: 'inherit',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '12px'
+        }}
+      >
+        <Handshake size={22} />
+        {brokersLabel}
+      </motion.button>
 
       {/* Back Button */}
       <motion.button
