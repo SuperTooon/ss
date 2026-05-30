@@ -5,17 +5,19 @@ import { useApp } from '../../contexts/AppContext';
 
 function useCounter(target, duration = 1000) {
   const [count, setCount] = useState(0);
-  const started = useRef(false);
   useEffect(() => {
-    if (!target || started.current) return;
-    started.current = true;
+    if (!target) return;
     const steps = 40;
     const step = target / steps;
     let current = 0;
     const timer = setInterval(() => {
       current += step;
-      if (current >= target) { setCount(target); clearInterval(timer); }
-      else setCount(Math.floor(current));
+      if (current >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(current));
+      }
     }, duration / steps);
     return () => clearInterval(timer);
   }, [target, duration]);

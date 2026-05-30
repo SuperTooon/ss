@@ -25,17 +25,18 @@ const defaultBrokers = {
 
 function useCounter(target, duration = 800) {
   const [count, setCount] = useState(0);
-  const started = useRef(false);
   useEffect(() => {
-    if (started.current) return;
-    started.current = true;
     const steps = 30;
     const step = target / steps;
     let current = 0;
     const timer = setInterval(() => {
       current += step;
-      if (current >= target) { setCount(target); clearInterval(timer); }
-      else setCount(Math.floor(current));
+      if (current >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(current));
+      }
     }, duration / steps);
     return () => clearInterval(timer);
   }, [target, duration]);
