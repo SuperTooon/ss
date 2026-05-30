@@ -26,7 +26,7 @@ const itemVariants = {
 };
 
 export default function ChannelsSection() {
-  const { t, navigateTo, isDark, lang } = useApp();
+  const { t, navigateTo, isDark, lang, playClickSound } = useApp();
   const Arrow = lang === 'ar' ? ArrowRight : ArrowLeft;
 
   const buttons = [
