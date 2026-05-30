@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Radio, Gavel, Gift, Search, Bot, ArrowLeft, ArrowRight } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
 import { telegramLinks } from '../../data/translations';
+import TiltCard from '../TiltCard';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -63,7 +64,7 @@ export default function ChannelsSection() {
 
       {/* Sub-section Buttons */}
       {buttons.map((button) => (
-        <motion.button
+        <TiltCard
           key={button.id}
           variants={itemVariants}
           onClick={() => navigateTo(button.id)}
@@ -88,7 +89,6 @@ export default function ChannelsSection() {
             background: isDark ? 'rgba(0,150,255,.15)' : 'rgba(255,255,255,.12)',
             backdropFilter: 'blur(8px)',
             boxShadow: '0 10px 26px rgba(0,0,0,.25)',
-            transition: 'all 0.25s ease',
             fontFamily: 'inherit',
             alignItems: 'center',
             justifyContent: 'center',
@@ -97,12 +97,13 @@ export default function ChannelsSection() {
         >
           <button.icon size={22} />
           {button.label}
-        </motion.button>
+        </TiltCard>
       ))}
 
       {/* Platform Bot Card */}
-      <motion.div
+      <TiltCard
         variants={itemVariants}
+        as="div"
         style={{
           width: 'min(360px, 90%)',
           margin: '10px auto',
@@ -111,7 +112,9 @@ export default function ChannelsSection() {
           border: `1px solid ${isDark ? 'rgba(0,180,255,.4)' : 'rgba(0,180,255,.5)'}`,
           background: isDark ? 'rgba(0,150,255,.12)' : 'rgba(0,150,255,.15)',
           backdropFilter: 'blur(8px)',
-          boxShadow: '0 10px 26px rgba(0,0,0,.25)'
+          boxShadow: '0 10px 26px rgba(0,0,0,.25)',
+          display: 'block',
+          textAlign: 'start'
         }}
       >
         <div style={{
@@ -164,14 +167,15 @@ export default function ChannelsSection() {
         >
           {lang === 'ar' ? 'الدخول للبوت →' : 'Enter Bot →'}
         </motion.a>
-      </motion.div>
+      </TiltCard>
 
       {/* Scammers Bot Link */}
-      <motion.a
+      <TiltCard
         variants={itemVariants}
         href={telegramLinks.scammersBot}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={playClickSound}
         whileHover={{ 
           scale: 1.02, 
           y: -2,
@@ -193,7 +197,6 @@ export default function ChannelsSection() {
           background: isDark ? 'rgba(255,100,100,.15)' : 'rgba(255,100,100,.2)',
           backdropFilter: 'blur(8px)',
           boxShadow: '0 10px 26px rgba(0,0,0,.25)',
-          transition: 'all 0.25s ease',
           fontFamily: 'inherit',
           textDecoration: 'none',
           alignItems: 'center',
@@ -203,7 +206,7 @@ export default function ChannelsSection() {
       >
         <Search size={22} />
         {t.links.scammers}
-      </motion.a>
+      </TiltCard>
 
       {/* Back Button */}
       <motion.button

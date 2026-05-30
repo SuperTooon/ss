@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Handshake, Radio, Gavel } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
+import TiltCard from '../TiltCard';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -115,7 +116,7 @@ export default function BrokersChoiceSection() {
 
       {/* Choice Buttons */}
       {choices.map((choice) => (
-        <motion.button
+        <TiltCard
           key={choice.id}
           variants={itemVariants}
           onClick={() => { playClickSound(); navigateTo(choice.id); }}
@@ -139,7 +140,6 @@ export default function BrokersChoiceSection() {
             background: choice.bg,
             backdropFilter: 'blur(12px)',
             boxShadow: `0 10px 28px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.12)`,
-            transition: 'all 0.25s ease',
             fontFamily: 'inherit',
             alignItems: 'center',
             justifyContent: 'center',
@@ -158,7 +158,7 @@ export default function BrokersChoiceSection() {
           }} />
           <choice.icon size={24} color={choice.color} />
           {lang === 'ar' ? choice.labelAr : choice.labelEn}
-        </motion.button>
+        </TiltCard>
       ))}
 
       {/* Back Button */}

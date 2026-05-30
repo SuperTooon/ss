@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import { User, ArrowLeft, ArrowRight, BadgeCheck } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
+import TiltCard from '../TiltCard';
 
 // Default auction brokers fallback
 const defaultBrokers = {
@@ -190,7 +191,7 @@ export default function AuctionBrokersSection() {
       {loading ? (
         <p style={{ opacity: 0.6 }}>Loading...</p>
       ) : brokers.map((broker, index) => (
-        <motion.a
+        <TiltCard
           key={index}
           variants={itemVariants}
           href={broker.link}
@@ -220,7 +221,6 @@ export default function AuctionBrokersSection() {
               : 'linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.08))',
             backdropFilter: 'blur(12px)',
             boxShadow: '0 10px 26px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.1)',
-            transition: 'all 0.25s ease',
             fontFamily: 'inherit',
             textDecoration: 'none',
             alignItems: 'center',
@@ -232,7 +232,7 @@ export default function AuctionBrokersSection() {
           <BrokerAvatar link={broker.link} />
           {broker.name}
           <VerifiedBadge isDark={isDark} />
-        </motion.a>
+        </TiltCard>
       ))}
 
       {/* Back Button */}

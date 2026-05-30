@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Crown, ArrowLeft, ArrowRight, ShieldCheck } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
+import TiltCard from '../TiltCard';
 
 function OwnerBadge({ isDark }) {
   return (
@@ -117,7 +118,7 @@ export default function OwnersSection() {
 
       {/* Owners List */}
       {t.owners.map((owner, index) => (
-        <motion.a
+        <TiltCard
           key={index}
           variants={itemVariants}
           href={owner.link}
@@ -147,7 +148,6 @@ export default function OwnersSection() {
               : 'linear-gradient(135deg, rgba(65,105,225,.35), rgba(25,25,112,.25))',
             backdropFilter: 'blur(12px)',
             boxShadow: '0 10px 26px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.12)',
-            transition: 'all 0.25s ease',
             fontFamily: 'inherit',
             textDecoration: 'none',
             alignItems: 'center',
@@ -158,7 +158,7 @@ export default function OwnersSection() {
           <OwnerAvatar link={owner.link} />
           {owner.name}
           <OwnerBadge isDark={isDark} />
-        </motion.a>
+        </TiltCard>
       ))}
 
       {/* Back Button */}

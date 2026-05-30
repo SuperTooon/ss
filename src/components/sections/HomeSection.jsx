@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import { Shield, Users, MessageCircle, Star, Eye } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
+import TiltCard from '../TiltCard';
 
 function useCounter(target, duration = 1000) {
   const [count, setCount] = useState(0);
@@ -211,7 +212,7 @@ export default function HomeSection() {
 
       {/* Buttons */}
       {buttons.map((button, index) => (
-        <motion.button
+        <TiltCard
           key={button.id}
           variants={itemVariants}
           onClick={() => handleNavigate(button.id)}
@@ -236,7 +237,6 @@ export default function HomeSection() {
             background: isDark ? 'rgba(0,150,255,.15)' : 'rgba(255,255,255,.12)',
             backdropFilter: 'blur(8px)',
             boxShadow: '0 10px 26px rgba(0,0,0,.25)',
-            transition: 'all 0.25s ease',
             fontFamily: 'inherit',
             alignItems: 'center',
             justifyContent: 'center',
@@ -245,7 +245,7 @@ export default function HomeSection() {
         >
           <button.icon size={22} />
           {button.label}
-        </motion.button>
+        </TiltCard>
       ))}
     </motion.section>
   );
