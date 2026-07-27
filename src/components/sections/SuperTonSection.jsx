@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Radio, Users, MessageCircle, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Radio, MessageCircle, ArrowLeft, ArrowRight } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
 import { telegramLinks } from '../../data/translations';
 
@@ -30,7 +30,6 @@ export default function SuperTonSection() {
 
   const links = [
     { label: t.links.superChannel, url: telegramLinks.superChannel, icon: Radio },
-    { label: t.links.superGroup, url: telegramLinks.superGroup, icon: Users },
     { label: t.links.superChat, url: telegramLinks.superChat, icon: MessageCircle }
   ];
 
