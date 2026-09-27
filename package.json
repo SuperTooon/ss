@@ -2,5 +2,8 @@
   "name": "super-ton-website",
   "version": "2.0.0",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "build": "echo 'Static build complete'"
+  }
 }
