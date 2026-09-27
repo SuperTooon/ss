@@ -1,7 +1,4 @@
 {
-  "framework": null,
-  "buildCommand": "echo 'Build successful'",
-  "outputDirectory": "./",
   "cleanUrls": true,
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
