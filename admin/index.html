@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="h-full antialiased dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>لوحة إدارة أنظمة وأزرار سوبر تون | Super Ton Admin</title>
+  <link rel="stylesheet" href="../_next/static/immutable/chunks/2c1-ruars9mpe.css" />
+  <link rel="icon" href="../images/Mylogo.png" />
+  <style>
+    body {
+      background-color: oklch(0.13 0.008 238);
+      color: oklch(0.98 0.005 238);
+      font-family: inherit;
+    }
+    .glass-panel {
+      background: rgba(22, 27, 34, 0.65);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .glass-input {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      transition: all 0.2s ease;
+    }
+    .glass-input:focus {
+      border-color: var(--accent, #00b4ff);
+      box-shadow: 0 0 15px -3px rgba(0, 180, 255, 0.4);
+      outline: none;
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col selection:bg-accent selection:text-accent-foreground">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 border-b border-border/60 bg-background/70 backdrop-blur-xl">
+    <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
+      <div class="flex items-center gap-3">
+        <a href="../index.html" class="flex items-center gap-2">
+          <img src="../images/Mylogo.png" alt="Super Ton" class="h-9 w-auto" />
+        </a>
+        <span class="text-xs font-bold text-accent bg-accent/10 px-2.5 py-1 rounded-full border border-accent/20">
+          لوحة التحكم الإدارية Admin
+        </span>
+      </div>
+      <div class="flex items-center gap-3">
+        <button id="reset-defaults-btn" class="hidden text-xs text-muted-foreground hover:text-rose-400 transition-colors px-3 py-1.5 rounded-lg border border-border/50">
+          إعادة الضبط للافتراضي
+        </button>
+        <a href="../index.html#skills" target="_blank" class="flex items-center gap-2 text-xs font-medium text-accent hover:underline bg-accent/10 px-3.5 py-2 rounded-full border border-accent/30">
+          <span>معاينة الموقع</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 sm:px-6">
+
+    <!-- PIN Unlock Screen -->
+    <div id="pin-screen" class="max-w-md mx-auto my-12 p-8 rounded-3xl glass-panel text-center shadow-2xl space-y-6">
+      <div class="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/15 text-accent border border-accent/30 shadow-lg">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      </div>
+      <div>
+        <h1 class="text-2xl font-bold text-foreground">دخول لوحة التحكم</h1>
+        <p class="text-xs text-muted-foreground mt-2">أدخل الرمز السري للإدارة للوصول لتعديل أزرار الموقع والروابط</p>
+      </div>
+      <form id="pin-form" class="space-y-4">
+        <div>
+          <input id="pin-input" type="password" placeholder="أدخل كلمة السر / الباسورد" class="w-full text-center tracking-widest text-lg py-3 px-4 rounded-xl glass-input" required />
+        </div>
+        <p id="pin-error" class="text-xs text-rose-400 hidden">رمز غير صحيح! حاول مجدداً</p>
+        <button type="submit" class="w-full py-3 px-6 rounded-xl bg-accent text-accent-foreground font-semibold text-sm transition-transform hover:scale-[1.02] active:scale-95 shadow-lg">
+          فتح لوحة التحكم
+        </button>
+      </form>
+    </div>
+
+    <!-- Admin Panel Dashboard Screen (Hidden until unlocked) -->
+    <div id="admin-dashboard" class="hidden space-y-8">
+      
+      <!-- Top Title & Controls -->
+      <div class="flex flex-wrap items-center justify-between gap-4 p-6 rounded-3xl glass-panel">
+        <div>
+          <h1 class="text-xl sm:text-2xl font-bold text-foreground flex items-center gap-2">
+            <span>تعديل أنظمة وأزرار سوبر تون</span>
+            <span class="text-xs text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">مباشر</span>
+          </h1>
+          <p class="text-xs text-muted-foreground mt-1">قم بتعديل المسميات العربية والإنجليزية والروابط والمعرفات، وستتم تحديثها فورياً في الموقع الرئيسي.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="flex items-center gap-2 bg-card/40 p-1.5 px-3 rounded-2xl border border-border/60">
+            <input id="change-pin-input" type="password" placeholder="تغيير كلمة السر" class="p-2 text-xs rounded-xl glass-input w-36" />
+            <button id="save-pin-btn" type="button" class="px-3 py-2 rounded-xl bg-accent/20 border border-accent/30 text-accent text-xs font-bold hover:bg-accent hover:text-accent-foreground transition-all">
+              تحديث الباسورد
+            </button>
+          </div>
+          <button id="save-all-btn" class="flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-accent-foreground font-bold text-sm shadow-[0_0_20px_-3px_var(--accent)] hover:scale-105 active:scale-95 transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            <span>حفظ التعديلات والتطبيق</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Categories Selector Tabs -->
+      <div id="category-tabs" class="flex flex-wrap gap-2 p-2 rounded-2xl glass-panel overflow-x-auto">
+        <!-- Tabs rendered dynamically -->
+      </div>
+
+      <!-- Category Meta Editor -->
+      <div id="category-meta" class="p-6 rounded-3xl glass-panel space-y-4">
+        <h2 class="text-sm font-bold text-accent uppercase tracking-wider">عنوان ووصف القسم المحدد</h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label class="block text-xs text-muted-foreground mb-1">عنوان القسم (عربي)</label>
+            <input id="cat-title-ar" type="text" class="w-full p-2.5 text-sm rounded-xl glass-input" />
+          </div>
+          <div>
+            <label class="block text-xs text-muted-foreground mb-1">Title (English)</label>
+            <input id="cat-title-en" type="text" class="w-full p-2.5 text-sm rounded-xl glass-input" dir="ltr" />
+          </div>
+          <div>
+            <label class="block text-xs text-muted-foreground mb-1">وصف القسم (عربي)</label>
+            <input id="cat-sub-ar" type="text" class="w-full p-2.5 text-sm rounded-xl glass-input" />
+          </div>
+          <div>
+            <label class="block text-xs text-muted-foreground mb-1">Subtitle (English)</label>
+            <input id="cat-sub-en" type="text" class="w-full p-2.5 text-sm rounded-xl glass-input" dir="ltr" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Items List Editor -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between px-2">
+          <h2 class="text-lg font-bold text-foreground">أزرار وعناصر هذا القسم</h2>
+          <button id="add-item-btn" class="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-accent/15 border border-accent/30 text-accent text-xs font-semibold hover:bg-accent/25 transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+            <span>إضافة عنصر جديد</span>
+          </button>
+        </div>
+
+        <div id="items-container" class="space-y-4">
+          <!-- Items Editor Cards rendered dynamically -->
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Success Toast -->
+  <div id="toast" class="fixed bottom-6 left-6 z-50 hidden flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-emerald-500 text-white font-semibold text-sm shadow-2xl animate-bounce">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+    <span id="toast-msg">تم حفظ كافة التغييرات بنجاح!</span>
+  </div>
+
+  <script src="../custom-interactivity.js"></script>
+  <script>
+    let activeCategoryKey = 'main';
+    let navTreeData = null;
+
+    // Element Selectors
+    const pinScreen = document.getElementById('pin-screen');
+    const adminDashboard = document.getElementById('admin-dashboard');
+    const pinForm = document.getElementById('pin-form');
+    const pinInput = document.getElementById('pin-input');
+    const pinError = document.getElementById('pin-error');
+    const categoryTabsContainer = document.getElementById('category-tabs');
+    const itemsContainer = document.getElementById('items-container');
+    const saveAllBtn = document.getElementById('save-all-btn');
+    const resetDefaultsBtn = document.getElementById('reset-defaults-btn');
+    const addItemBtn = document.getElementById('add-item-btn');
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toast-msg');
+
+    // Category labels map
+    const catLabels = {
+      main: 'فئات الرئيسية',
+      trust: 'قسم الثقة',
+      channels: 'قسم القنوات',
+      superton: 'سوبر تون الرسمي',
+      auction: 'قسم المزادات',
+      gifts: 'قسم الهدايا',
+      brokers: 'قسم الوسطاء',
+      superBrokers: 'وسطاء سوبر تون',
+      auctionBrokers: 'وسطاء المزادات',
+      owners: 'مالكو المنصة'
+    };
+
+    // Unlock Admin Screen (Supports Vercel API ADMIN_PIN & Local fallback)
+    pinForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const enteredPin = pinInput.value.trim();
+      
+      try {
+        const res = await fetch('/api/admin/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pin: enteredPin }),
+        });
+        if (res.ok) {
+          pinScreen.classList.add('hidden');
+          adminDashboard.classList.remove('hidden');
+          resetDefaultsBtn.classList.remove('hidden');
+          initAdminData();
+          return;
+        }
+      } catch (err) {
+        // Continue to local verification if API serverless is unavailable
+      }
+
+      const savedPin = localStorage.getItem('superton_admin_pin');
+      const validPins = ['mmm@#2002', '1234', 'mazen'];
+      if (savedPin) validPins.push(savedPin);
+
+      if (validPins.includes(enteredPin)) {
+        pinScreen.classList.add('hidden');
+        adminDashboard.classList.remove('hidden');
+        resetDefaultsBtn.classList.remove('hidden');
+        initAdminData();
+      } else {
+        pinError.classList.remove('hidden');
+      }
+    });
+
+    function initAdminData() {
+      try {
+        const saved = localStorage.getItem('superton_nav_data_v2');
+        if (saved) {
+          navTreeData = JSON.parse(saved);
+        } else {
+          navTreeData = JSON.parse(JSON.stringify(SUPER_TON_NAV_DATA));
+        }
+      } catch (e) {
+        navTreeData = JSON.parse(JSON.stringify(SUPER_TON_NAV_DATA));
+      }
+
+      renderTabs();
+      renderActiveCategory();
+    }
+
+    function renderTabs() {
+      categoryTabsContainer.innerHTML = '';
+      Object.keys(navTreeData).forEach(catKey => {
+        const label = catLabels[catKey] || navTreeData[catKey].title.ar;
+        const isActive = (catKey === activeCategoryKey);
+        const btn = document.createElement('button');
+        btn.className = `px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+          isActive 
+            ? 'bg-accent text-accent-foreground shadow-md' 
+            : 'text-muted-foreground hover:text-foreground hover:bg-card/60'
+        }`;
+        btn.textContent = label;
+        btn.onclick = () => {
+          syncCurrentCategoryForm();
+          activeCategoryKey = catKey;
+          renderTabs();
+          renderActiveCategory();
+        };
+        categoryTabsContainer.appendChild(btn);
+      });
+    }
+
+    function renderActiveCategory() {
+      const catData = navTreeData[activeCategoryKey];
+      if (!catData) return;
+
+      document.getElementById('cat-title-ar').value = catData.title?.ar || '';
+      document.getElementById('cat-title-en').value = catData.title?.en || '';
+      document.getElementById('cat-sub-ar').value = catData.subtitle?.ar || '';
+      document.getElementById('cat-sub-en').value = catData.subtitle?.en || '';
+
+      itemsContainer.innerHTML = '';
+      catData.items.forEach((item, idx) => {
+        const titleAr = item.title?.ar || item.title || '';
+        const titleEn = item.title?.en || '';
+        const descAr = item.desc?.ar || item.subtitle?.ar || '';
+        const descEn = item.desc?.en || item.subtitle?.en || '';
+        const href = item.href || '';
+        const username = item.username || '';
+        const type = item.type || 'link';
+
+        const itemCard = document.createElement('div');
+        itemCard.className = 'p-5 rounded-2xl glass-panel border border-border/60 space-y-4';
+        itemCard.innerHTML = `
+          <div class="flex items-center justify-between border-b border-border/40 pb-3">
+            <span class="text-xs font-bold text-accent bg-accent/10 px-2.5 py-1 rounded-lg border border-accent/20">
+              عنصر #${idx + 1} (${type === 'category' ? 'فئة' : type === 'broker' ? 'وسيط' : type === 'owner' ? 'مالك' : 'رابط'})
+            </span>
+            <button onclick="deleteItem(${idx})" class="text-xs font-semibold text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 px-3 py-1 rounded-lg transition-colors">
+              حذف العنصر 🗑️
+            </button>
+          </div>
+          <div class="grid gap-3 sm:grid-cols-2">
+            <div>
+              <label class="block text-[11px] text-muted-foreground mb-1">الاسم بالعربية</label>
+              <input type="text" data-field="title-ar" value="${escapeHtml(titleAr)}" class="w-full p-2 text-xs rounded-lg glass-input" />
+            </div>
+            <div>
+              <label class="block text-[11px] text-muted-foreground mb-1">Name in English</label>
+              <input type="text" data-field="title-en" value="${escapeHtml(titleEn)}" class="w-full p-2 text-xs rounded-lg glass-input" dir="ltr" />
+            </div>
+            <div>
+              <label class="block text-[11px] text-muted-foreground mb-1">الوصف الفرعي (عربي)</label>
+              <input type="text" data-field="desc-ar" value="${escapeHtml(descAr)}" class="w-full p-2 text-xs rounded-lg glass-input" />
+            </div>
+            <div>
+              <label class="block text-[11px] text-muted-foreground mb-1">Description (English)</label>
+              <input type="text" data-field="desc-en" value="${escapeHtml(descEn)}" class="w-full p-2 text-xs rounded-lg glass-input" dir="ltr" />
+            </div>
+            ${type !== 'category' ? `
+            <div>
+              <label class="block text-[11px] text-muted-foreground mb-1">رابط التليجرام / Link URL</label>
+              <input type="text" data-field="href" value="${escapeHtml(href)}" class="w-full p-2 text-xs rounded-lg glass-input" dir="ltr" />
+            </div>
+            ` : ''}
+            ${type === 'broker' || type === 'owner' ? `
+            <div>
+              <label class="block text-[11px] text-muted-foreground mb-1">المعرف بدون @ / Username</label>
+              <input type="text" data-field="username" value="${escapeHtml(username)}" class="w-full p-2 text-xs rounded-lg glass-input" dir="ltr" />
+            </div>
+            ` : ''}
+          </div>
+        `;
+        itemsContainer.appendChild(itemCard);
+      });
+    }
+
+    function syncCurrentCategoryForm() {
+      const catData = navTreeData[activeCategoryKey];
+      if (!catData) return;
+
+      catData.title = {
+        ar: document.getElementById('cat-title-ar').value,
+        en: document.getElementById('cat-title-en').value
+      };
+      catData.subtitle = {
+        ar: document.getElementById('cat-sub-ar').value,
+        en: document.getElementById('cat-sub-en').value
+      };
+
+      const cards = itemsContainer.children;
+      for (let i = 0; i < cards.length; i++) {
+        if (!catData.items[i]) continue;
+        const card = cards[i];
+        const titleAr = card.querySelector('[data-field="title-ar"]')?.value || '';
+        const titleEn = card.querySelector('[data-field="title-en"]')?.value || '';
+        const descAr = card.querySelector('[data-field="desc-ar"]')?.value || '';
+        const descEn = card.querySelector('[data-field="desc-en"]')?.value || '';
+        const href = card.querySelector('[data-field="href"]')?.value || '';
+        const username = card.querySelector('[data-field="username"]')?.value || '';
+
+        catData.items[i].title = { ar: titleAr, en: titleEn };
+        if (catData.items[i].type === 'category') {
+          catData.items[i].desc = { ar: descAr, en: descEn };
+        } else {
+          catData.items[i].subtitle = { ar: descAr, en: descEn };
+        }
+        if (href) catData.items[i].href = href;
+        if (username) catData.items[i].username = username;
+      }
+    }
+
+    window.deleteItem = function(idx) {
+      if (confirm('هل أنت تأكد من رغبتك في حذف هذا العنصر؟')) {
+        syncCurrentCategoryForm();
+        navTreeData[activeCategoryKey].items.splice(idx, 1);
+        renderActiveCategory();
+      }
+    };
+
+    addItemBtn.onclick = () => {
+      syncCurrentCategoryForm();
+      const catData = navTreeData[activeCategoryKey];
+      const isBrokerCat = (activeCategoryKey === 'superBrokers' || activeCategoryKey === 'auctionBrokers');
+      const isOwnerCat = (activeCategoryKey === 'owners');
+
+      const newItem = {
+        id: 'new_item_' + Date.now(),
+        title: { ar: 'عنصر جديد', en: 'New Item' },
+        subtitle: { ar: 'وصف عنصر جديد', en: 'New item description' },
+        href: 'https://t.me/',
+        type: isOwnerCat ? 'owner' : isBrokerCat ? 'broker' : 'link'
+      };
+
+      if (isBrokerCat || isOwnerCat) {
+        newItem.username = 'username';
+      }
+
+      catData.items.push(newItem);
+      renderActiveCategory();
+    };
+
+    const changePinInput = document.getElementById('change-pin-input');
+    const savePinBtn = document.getElementById('save-pin-btn');
+
+    if (savePinBtn) {
+      savePinBtn.onclick = () => {
+        const newPin = changePinInput.value.trim();
+        if (!newPin) {
+          alert('يرجى كتابة كلمة السر الجديدة أولاً!');
+          return;
+        }
+        localStorage.setItem('superton_admin_pin', newPin);
+        changePinInput.value = '';
+        showToast('تم تغيير كلمة السر بنجاح! يمكنك الدخول بها في المرات القادمة.');
+      };
+    }
+
+    saveAllBtn.onclick = () => {
+      syncCurrentCategoryForm();
+      try {
+        localStorage.setItem('superton_nav_data_v2', JSON.stringify(navTreeData));
+        showToast('تم حفظ كافة التعديلات والروابط بنجاح! ستظهر فوراً في الموقع الرئيسي.');
+      } catch (err) {
+        alert('حدث خطأ في الحفظ!');
+      }
+    };
+
+    resetDefaultsBtn.onclick = () => {
+      if (confirm('هل تريد إعادة ضبط جميع الأزرار والروابط للافتراضي الأصلي؟')) {
+        localStorage.removeItem('superton_nav_data_v2');
+        initAdminData();
+        showToast('تمت إعادة الضبط للافتراضي الاصلي بنجاح!');
+      }
+    };
+
+    function showToast(msg) {
+      toastMsg.textContent = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 4000);
+    }
+
+    function escapeHtml(str) {
+      if (typeof str !== 'string') return '';
+      return str.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+  </script>
+</body>
+</html>
