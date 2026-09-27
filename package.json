@@ -1,9 +1,9 @@
 {
-  "name": "super-ton-website",
-  "version": "2.0.0",
+  "name": "super-ton",
   "private": true,
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
-    "build": "echo 'Static build complete'"
+    "build": "node build.js"
   }
 }
